@@ -11,7 +11,6 @@ script:
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
   - docker build -t nerdcorech/multi-client -f ./client .
   - docker build -t nerdcorech/multi-nginx -f ./nginx .
   - docker build -t nerdcorech/multi-server -f ./server .
@@ -21,7 +20,7 @@ after_success:
   - docker push nerdcorech/multi-server
   - docker push nerdcorech/multi-worker
 
-# deploy:
+deploy:
 #   provider: elasticbeanstalk
 #   region: "eu-central-1"
 #   app: "udemy-docker-kubernete-course-v2"
