@@ -11,10 +11,10 @@ script:
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker build -t nerdcorech/multi-client:latest -f ./client ./client
-  - docker build -t nerdcorech/multi-nginx:latest -f ./nginx ./nginx
-  - docker build -t nerdcorech/multi-server:latest -f ./server ./server
-  - docker build -t nerdcorech/multi-worker:latest -f ./worker ./worker
+  - docker build -t nerdcorech/multi-client:latest -f ./client/Dockerfile.dev ./client
+  - docker build -t nerdcorech/multi-nginx:latest -f ./nginx/Dockerfile.dev ./nginx
+  - docker build -t nerdcorech/multi-server:latest -f ./server/Dockerfile.dev ./server
+  - docker build -t nerdcorech/multi-worker:latest -f ./worker/Dockerfile.dev ./worker
   - docker push nerdcorech/multi-client:latest
   - docker push nerdcorech/multi-nginx:latest
   - docker push nerdcorech/multi-server:latest
