@@ -11,23 +11,23 @@ script:
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker build -t nerdcorech/multi-client:latest -f ./client/Dockerfile.dev ./client
-  - docker build -t nerdcorech/multi-nginx:latest -f ./nginx/Dockerfile.dev ./nginx
-  - docker build -t nerdcorech/multi-server:latest -f ./server/Dockerfile.dev ./server
-  - docker build -t nerdcorech/multi-worker:latest -f ./worker/Dockerfile.dev ./worker
-  - docker push nerdcorech/multi-client:latest
-  - docker push nerdcorech/multi-nginx:latest
-  - docker push nerdcorech/multi-server:latest
-  - docker push nerdcorech/multi-worker:latest
+  - docker build -t nerdcorech/multi-client -f ./client/Dockerfile.dev ./client
+  - docker build -t nerdcorech/multi-nginx -f ./nginx/Dockerfile.dev ./nginx
+  - docker build -t nerdcorech/multi-server -f ./server/Dockerfile.dev ./server
+  - docker build -t nerdcorech/multi-worker -f ./worker/Dockerfile.dev ./worker
+  - docker push nerdcorech/multi-client
+  - docker push nerdcorech/multi-nginx
+  - docker push nerdcorech/multi-server
+  - docker push nerdcorech/multi-worker
 
 deploy:
-#   provider: elasticbeanstalk
-#   region: "eu-central-1"
-#   app: "udemy-docker-kubernete-course-v2"
-#   env: "UdemyDockerKuberneteCourseV2-env"
-#   bucket_name: "elasticbeanstalk-eu-central-1-045015727085"
-#   bucket_path: "udemy-docker-kubernete-course-v2"
-#   access_key_id: $AWS_ACCESS_KEY
-#   secret_access_key: $AWS_SECRET_KEY
-#   on:
-#     branch: master
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "multi-docker"
+  env: "MultiDocker-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-045015727085"
+  bucket_path: "multi-docker"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  on:
+    branch: master
